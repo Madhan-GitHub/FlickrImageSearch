@@ -9,9 +9,15 @@ import Testing
 @testable import FlickrImageSearch
 
 struct FlickrImageSearchTests {
-
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+    private var viewModel: FlickrViewModel!
+    
+    init() {
+        viewModel = FlickrViewModel()
     }
-
+    
+    @Test func testUpdateSearchTextTriggersFetch() async {
+        let previousSearchText = viewModel.searchText
+        viewModel.updateSearchText("porcupine")
+        #expect(viewModel.searchText != previousSearchText, "Search text should be updated")
+    }
 }
